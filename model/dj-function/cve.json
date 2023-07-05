@@ -1,0 +1,33 @@
+{
+    "djClassName": "com.dashjoin.function.ETL",
+    "database": "itsm",
+    "ID": "cve",
+    "expressions": {
+        "expression": "$openJson(\"file:upload/nvdcve-1.1-2023.json\").CVE_Items"
+    },
+    "mappings": {
+        "cve": {
+            "sourceTable": "table",
+            "extractColumn": null,
+            "extractKey": null,
+            "pk": "id",
+            "rowMapping": {
+                "publishedDate": "publishedDate",
+                "lastModifiedDate": "lastModifiedDate",
+                "cwe": "cve. problemtype. problemtype_data.description.value",
+                "url": "cve. references. reference_data.url",
+                "description": "cve. description. description_data.value",
+                "id": "cve.CVE_data_meta.ID",
+                "vector": "impact.baseMetricV3.cvssV3.vectorString",
+                "exploitabilityScore": "impact.baseMetricV3.exploitabilityScore",
+                "impactScore": "impact.baseMetricV3.impactScore"
+            },
+            "rowFilter": null
+        }
+    },
+    "oldData": "Delete All",
+    "createSchema": true,
+    "start": "2023-07-05T12:30:28.701+00:00",
+    "status": "success",
+    "end": "2023-07-05T12:30:30.207+00:00"
+}
