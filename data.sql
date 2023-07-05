@@ -9,6 +9,7 @@ delete from Datacenter;
 
 INSERT INTO Software
 VALUES
+  ("netapp-ontap", "netapp", "ontap_tools", "11"),
   ("vmware-vsphere-9", "vmware", "vsphere", "9"),
   ("sap-host-agent", "sap", "host_agent", "7.22"),
   ("windows-server-2019", "micosoft", "windows-server", "2019"),
@@ -22,6 +23,8 @@ VALUES
 
 INSERT INTO Host
 VALUES
+  ("vmware03", "vmware", 4, 256, 1014, null, "London"),
+  ("vmware04", "vmware", 4, 256, 1014, null, "Los Angeles"),
   ("vmware01", "vmware", 2, 128, 1014, null, "Stuttgart"),
   ("vmware02", "vmware", 2, 128, 1014, null, "Stuttgart"),
   ("dc", "windows", 1, 32, 128, "vmware01", "Stuttgart"),
@@ -30,6 +33,7 @@ VALUES
 
 INSERT INTO Application
 VALUES
+  ("netapp-ontap", "netapp-ontap", "vmware03"),
   ("sap-agent", "sap-host-agent", "sap"),
   ("windows-sap", "windows-server-2019", "sap");
 
