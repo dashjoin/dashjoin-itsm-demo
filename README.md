@@ -44,7 +44,7 @@ Visit the [database dashboard](http://localhost:8080/#/table/config/dj-database)
 * The Cyber Dashboard already shows that some of the software is affected by various CVEs
 * We now load information from the MITRE Attack framework to get more information
 * ETL this expression 
-  * $ls(\"file:upload/cti/enterprise-attack/relationship\").url.$openJson($)
+  * ```$ls(\"file:upload/cti/enterprise-attack/relationship\").url.$openJson($)```
   * Change the column "objects" to "objects.description"
   * Change the table name to "mitre"
 * We can now do a full text search for our [CVE](http://localhost:8080/#/search/itsm/mitre/CVE-2021-44228)
