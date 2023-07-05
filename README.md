@@ -37,3 +37,14 @@ Visit the [database dashboard](http://localhost:8080/#/table/config/dj-database)
 * On the home page, add a pie chart widget with the query: select hosts grouped by datacenter
 * Note that you can click on the chart to get to the datacenter page
 
+## ETL
+
+* To prepare the data, run git clone https://github.com/mitre/cti in the upload folder
+* The database already contains information from the National Vulnerability Database (NVD)
+* The Cyber Dashboard already shows that some of the software is affected by various CVEs
+* We now load information from the MITRE Attack framework to get more information
+* ETL this expression 
+  * $ls(\"file:upload/cti/enterprise-attack/relationship\").url.$openJson($)
+  * Change the column "objects" to "objects.description"
+  * Change the table name to "mitre"
+* We can now do a full text search for our [CVE](http://localhost:8080/#/search/itsm/mitre/CVE-2021-44228)
