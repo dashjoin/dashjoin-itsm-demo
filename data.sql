@@ -1,9 +1,11 @@
+PRAGMA foreign_keys = 1;
+
 delete from User;
-delete from Datacenter;
-delete from Host;
 delete from Application;
 delete from Ticket;
 delete from Software;
+delete from Host;
+delete from Datacenter;
 
 INSERT INTO Software
 VALUES
@@ -11,6 +13,12 @@ VALUES
   ("sap-host-agent", "sap", "host_agent", "7.22"),
   ("windows-server-2019", "micosoft", "windows-server", "2019"),
   ("exchange-2019", "micosoft", "exchange", "2019");
+
+INSERT INTO Datacenter
+VALUES
+  ("Stuttgart", "Kronenstr. 14, Stuttgart"),
+  ("London", "Madela Way 9, London"),
+  ("Los Angeles", "3300 Lomita Blvd, Torrance, CA 90505, United States");
 
 INSERT INTO Host
 VALUES
@@ -20,11 +28,10 @@ VALUES
   ("sap", "windows", 1, 32, 128, "vmware01", "Stuttgart"),
   ("exchange", "windows", 1, 32, 128, "vmware02", "Stuttgart");
 
-INSERT INTO Datacenter
+INSERT INTO Application
 VALUES
-  ("Stuttgart", "Kronenstr. 14, Stuttgart"),
-  ("London", "Madela Way 9, London"),
-  ("Los Angeles", "3300 Lomita Blvd, Torrance, CA 90505, United States");
+  ("sap-agent", "sap-host-agent", "sap"),
+  ("windows-sap", "windows-server-2019", "sap");
 
 INSERT INTO User (id,name)
 VALUES

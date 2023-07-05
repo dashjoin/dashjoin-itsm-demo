@@ -16,7 +16,7 @@ create table Host (
   cpus int,
   ramGB int,
   diskGB int,
-  vmHost text references id,
+  vmHost text references Host(id),
   datacenter text references Datacenter(id)
 );
 
