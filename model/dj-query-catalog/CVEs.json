@@ -1,0 +1,6 @@
+{
+    "ID": "CVEs",
+    "type": "read",
+    "query-pointer": "0.sql",
+    "database": "dj/itsm"
+}

@@ -1,0 +1,15 @@
+{
+    "ID": "Cyber",
+    "layout": {
+        "widget": "page",
+        "pageLayout": "horizontal",
+        "children": [
+            {
+                "widget": "table",
+                "title": "CVEs",
+                "query": "CVEs",
+                "database": "itsm"
+            }
+        ]
+    }
+}
