@@ -24,7 +24,8 @@ create table Software (
   id text primary key not null,
   vendor text,
   name text,
-  version text
+  version text,
+  description text
 );
 
 create table Application (
@@ -39,10 +40,11 @@ create table User (
 );
 
 create table Ticket (
-  id text primary key not null,
-  description text,
+  id integer primary key AUTOINCREMENT,
+  description text not null,
   created date,
   user text references User(id),
+  severity text,
   application text references Application(id)
 );
 
