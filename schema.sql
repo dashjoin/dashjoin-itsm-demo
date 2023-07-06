@@ -31,7 +31,8 @@ create table Software (
 create table Application (
   id text primary key not null,
   software text references Software(id),
-  runsOn text references Host(id)
+  runsOn text references Host(id),
+  description text
 );
 
 create table User (

@@ -41,6 +41,14 @@ VALUES
 
 INSERT INTO Host
 VALUES
+  ("linux01", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux02", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux03", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux04", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux05", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux06", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux07", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
+  ("linux08", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
   ("vmware03", "vmware", 4, 256, 1014, null, "London"),
   ("vmware04", "vmware", 4, 256, 1014, null, "Los Angeles"),
   ("vmware01", "vmware", 2, 128, 1014, null, "Stuttgart"),
@@ -51,9 +59,17 @@ VALUES
 
 INSERT INTO Application
 VALUES
-  ("netapp-ontap", "netapp-ontap", "vmware03"),
-  ("sap-agent", "sap-host-agent", "sap"),
-  ("windows-sap", "windows-server-2019", "sap");
+  ("netapp-ontap", "netapp-ontap", "vmware03", "ontop software for internal netapp file server"),
+  ("sap-agent", "sap-host-agent", "sap", "central ERP instance used by all offices"),
+  ("windows-sap", "windows-server-2019", "sap", "operating system instance for the central SAP"),
+  ("linux01", "linux_kernel", "linux01", "Linux cluster node 1"),
+  ("linux02", "linux_kernel", "linux02", "Linux cluster node 2"),
+  ("linux03", "linux_kernel", "linux03", "Linux cluster node 3"),
+  ("linux04", "linux_kernel", "linux04", "Linux cluster node 4"),
+  ("linux05", "linux_kernel", "linux05", "Linux cluster node 5"),
+  ("linux06", "linux_kernel", "linux06", "Linux cluster node 6"),
+  ("linux07", "linux_kernel", "linux07", "Linux cluster node 7"),
+  ("linux08", "linux_kernel", "linux08", "Linux cluster node 8");
 
 INSERT INTO User (id,name)
 VALUES
