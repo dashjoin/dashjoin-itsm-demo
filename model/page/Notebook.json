@@ -1,0 +1,16 @@
+{
+    "ID": "Notebook",
+    "layout": {
+        "widget": "page",
+        "pageLayout": "horizontal",
+        "children": [
+            {
+                "widget": "notebook",
+                "title": "Dashjoin Notebook",
+                "columns": [
+                    "$exec(\"bin/llm.sh\", \"\\\"Summarize the following ticket as JSON object containing issue, time, and category: I would like to upgrade my office version but my user does not have the privileges required. Can someone come by my office tomorrow around 10am?\\\"\")"
+                ]
+            }
+        ]
+    }
+}
