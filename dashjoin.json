@@ -1,0 +1,14 @@
+{
+    "$schema": "https://dashjoin.com/schema/app-manifest-v1.json",
+    "license": "Apache 2.0",
+    "name": "Dashjoin ITSM Demo Application",
+    "categories": [
+        "Demo",
+        "Training"
+    ],
+    "description": "Dashjoin Demo app showing base capabilities of the platform in an IT service management use case",
+    "author": "Dashjoin",
+    "website": "https://dashjoin.com",
+    "url": "https://github.com/dashjoin/dashjoin-itsm-demo",
+    "email": "info@dashjoin.com"
+}
