@@ -1,0 +1,44 @@
+{
+    "ID": "Security",
+    "layout": {
+        "widget": "page",
+        "roles": [
+            "agent"
+        ],
+        "children": [
+            {
+                "widget": "chart",
+                "title": "Known CVEs per application",
+                "size": 6,
+                "chart": "bar",
+                "expression": "$query('itsm', 'exposure').{'application': `Application.application`, 'known CVEs': cves}"
+            },
+            {
+                "widget": "display",
+                "title": "Exposure",
+                "size": 6,
+                "display": "($rating := $use('cvss-rating') ~> $eval; $query('itsm', 'exposure').{'application': {'database': 'itsm', 'table': 'Application', 'pk1': `Application.application`}, 'worst': $rating(maxScore), 'max score': maxScore, 'CVEs': cves})"
+            },
+            {
+                "widget": "variable",
+                "title": "Threat intel search",
+                "size": 4,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "search": {
+                            "widget": "string",
+                            "title": "CVE, software or threat actor"
+                        }
+                    }
+                }
+            },
+            {
+                "widget": "display",
+                "title": "Results",
+                "size": 8,
+                "display": "variable.search ? $search(variable.search, 20, 'itsm').{'record': id, 'table': id.table, 'found in': column, 'match': $substring(match, 0, 160)}"
+            }
+        ]
+    }
+}

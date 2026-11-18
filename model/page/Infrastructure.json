@@ -1,0 +1,27 @@
+{
+    "ID": "Infrastructure",
+    "layout": {
+        "widget": "page",
+        "roles": [
+            "agent"
+        ],
+        "children": [
+            {
+                "widget": "tabs",
+                "children": [
+                    {
+                        "widget": "diagram",
+                        "title": "Topology",
+                        "edges": "$all('itsm', 'Host').{'source': vmHost ? vmHost : datacenter, 'target': id}",
+                        "nodes-pointer": "topology.jsonata"
+                    },
+                    {
+                        "widget": "tree",
+                        "title": "Hierarchy",
+                        "expression-pointer": "hierarchy.jsonata"
+                    }
+                ]
+            }
+        ]
+    }
+}

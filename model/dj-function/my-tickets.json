@@ -1,0 +1,11 @@
+{
+    "ID": "my-tickets",
+    "djClassName": "org.dashjoin.function.Invoke",
+    "type": "read",
+    "roles": [
+        "requester",
+        "agent"
+    ],
+    "runas": "agent",
+    "expression": "$all(\"itsm\", \"Ticket\", 0, 100, \"created\", true, {\"user\": $djUser()})"
+}

@@ -1,0 +1,9 @@
+{
+    "ID": "tickets-per-week",
+    "database": "dj/itsm",
+    "type": "read",
+    "roles": [
+        "agent"
+    ],
+    "query": "select strftime('%Y-%W', created) as week, count(*) as tickets from Ticket group by 1 order by 1"
+}

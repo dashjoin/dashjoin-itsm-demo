@@ -1,0 +1,97 @@
+<html>
+<head>
+  <style>
+    #noc { position: relative; overflow: hidden; border-radius: 20px; padding: 32px 40px; color: #e2e8f0;
+           display: flex; align-items: center; gap: 44px; flex-wrap: wrap;
+           background: radial-gradient(circle at 15% 50%, #134e4a 0, #0f172a 55%), #0f172a;
+           box-shadow: 0 12px 40px rgba(15,118,110,.35); font-family: inherit; }
+    #noc::before { content: ""; position: absolute; inset: 0; opacity: .25; pointer-events: none;
+                   background-image: linear-gradient(#14b8a6 1px, transparent 1px), linear-gradient(90deg, #14b8a6 1px, transparent 1px);
+                   background-size: 32px 32px; mask-image: linear-gradient(90deg, #000, transparent 70%); }
+
+    #noc-radar { position: relative; width: 170px; height: 170px; border-radius: 50%; flex: none;
+                 border: 2px solid rgba(45,212,191,.6); box-shadow: 0 0 30px rgba(45,212,191,.35), inset 0 0 30px rgba(45,212,191,.2);
+                 background: repeating-radial-gradient(circle, transparent 0 27px, rgba(45,212,191,.35) 28px 29px); }
+    #noc-sweep { position: absolute; inset: 0; border-radius: 50%; animation: noc-spin 3s linear infinite;
+                 background: conic-gradient(from 0deg, rgba(45,212,191,.55), transparent 70deg); }
+    @keyframes noc-spin { to { transform: rotate(360deg); } }
+    .noc-blip { position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%; animation: noc-pulse 1.6s ease-out infinite; }
+    @keyframes noc-pulse { 0% { box-shadow: 0 0 0 0 currentColor; } 100% { box-shadow: 0 0 0 14px transparent; } }
+
+    #noc h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -1px; color: #fff; }
+    #noc-clock { font-family: ui-monospace, monospace; color: #5eead4; letter-spacing: 2px; margin: 6px 0 22px; }
+    #noc-stats { display: flex; gap: 30px; flex-wrap: wrap; }
+    #noc-stats b { display: block; font-size: 32px; font-weight: 800; color: #fff; }
+    #noc-stats span { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: .7; }
+    #noc-dcs { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    #noc-dcs a { display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 99px; text-decoration: none;
+                 color: #e2e8f0; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); font-size: 13px; }
+    #noc-dcs a:hover { background: rgba(255,255,255,.16); }
+    #noc-dcs i { width: 9px; height: 9px; border-radius: 50%; background: currentColor; animation: noc-pulse 1.6s ease-out infinite; }
+  </style>
+  <script>
+    // no JS template literals: Dashjoin uses the dollar-brace syntax for its own templating
+    (async () => {
+      const query = async id => (await fetch("/rest/database/query/itsm/" + id, { method: "POST", body: "{}",
+        headers: { "Authorization": localStorage.getItem("auth-token"), "Content-Type": "application/json" } })).json();
+      const color = dc => dc.urgent > 0 ? "#f87171" : dc.open > 0 ? "#fbbf24" : "#4ade80";
+
+      // live clock
+      const clock = document.getElementById("noc-clock");
+      const tick = () => { if (clock.isConnected) clock.textContent = "LIVE · " + new Date().toLocaleString(); };
+      tick(); setInterval(tick, 1000);
+
+      // counters
+      const kpi = (await query("kpis"))[0];
+      document.querySelectorAll("#noc-stats b").forEach(el => {
+        const target = kpi[el.dataset.key], t0 = performance.now(), digits = target % 1 ? 1 : 0;
+        const step = now => {
+          const p = Math.min((now - t0) / 1400, 1);
+          el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(digits);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+
+      // datacenter health: pills and radar blips
+      const radar = document.getElementById("noc-radar"), pills = document.getElementById("noc-dcs");
+      (await query("datacenter-health")).forEach((row, i, all) => {
+        const dc = { id: row["Datacenter.datacenter"], open: row.open, urgent: row.urgent || 0 };
+        const pill = document.createElement("a");
+        pill.href = "#/itsm/Datacenter/" + encodeURIComponent(dc.id);
+        pill.style.color = color(dc);
+        pill.innerHTML = "<i></i><span></span>";
+        pill.querySelector("span").textContent = dc.id + " · " + dc.open + " open";
+        pill.querySelector("span").style.color = "#e2e8f0";
+        pills.appendChild(pill);
+
+        const angle = (i / all.length) * 2 * Math.PI + .6, r = 35 + (i % 2) * 22;
+        const blip = document.createElement("div");
+        blip.className = "noc-blip";
+        blip.style.left = (85 + r * Math.cos(angle)) + "px";
+        blip.style.top = (85 + r * Math.sin(angle)) + "px";
+        blip.style.color = color(dc);
+        blip.style.background = color(dc);
+        blip.title = dc.id;
+        radar.appendChild(blip);
+      });
+    })();
+  </script>
+</head>
+<body>
+  <div id="noc">
+    <div id="noc-radar"><div id="noc-sweep"></div></div>
+    <div>
+      <h1>🛰️ IT Operations Center</h1>
+      <div id="noc-clock"></div>
+      <div id="noc-stats">
+        <div><b data-key="open">0</b><span>Open tickets</span></div>
+        <div><b data-key="urgent">0</b><span>High / critical</span></div>
+        <div><b data-key="hoursToResolve">0</b><span>Hours to resolve</span></div>
+        <div><b data-key="exposedApps">0</b><span>Apps with CVEs</span></div>
+      </div>
+      <div id="noc-dcs"></div>
+    </div>
+  </div>
+</body>
+</html>

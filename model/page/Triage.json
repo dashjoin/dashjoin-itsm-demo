@@ -1,0 +1,21 @@
+{
+    "ID": "Triage",
+    "layout": {
+        "widget": "page",
+        "roles": [
+            "agent"
+        ],
+        "children": [
+            {
+                "widget": "markdown",
+                "markdown-pointer": "intro.md"
+            },
+            {
+                "widget": "datagrid",
+                "idColumn": "id",
+                "expression": "$all('itsm', 'Ticket')[status != 'resolved'].{'id': id, 'title': title, 'application': application, 'severity': severity, 'status': status, 'assignee': assignee}",
+                "onchange": "$update('itsm', 'Ticket', id, updatedRow)"
+            }
+        ]
+    }
+}

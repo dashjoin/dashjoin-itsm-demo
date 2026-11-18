@@ -1,0 +1,10 @@
+{
+    "ID": "dj-sidenav",
+    "layout": {
+        "widget": "tree",
+        "query": null,
+        "database": null,
+        "cached": null,
+        "expression-pointer": "menu.jsonata"
+    }
+}

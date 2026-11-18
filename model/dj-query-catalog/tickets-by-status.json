@@ -1,0 +1,9 @@
+{
+    "ID": "tickets-by-status",
+    "database": "dj/itsm",
+    "type": "read",
+    "roles": [
+        "agent"
+    ],
+    "query": "select status, count(*) as tickets from Ticket group by status order by 2 desc"
+}

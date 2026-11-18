@@ -1,0 +1,28 @@
+{
+    "ID": "cvss-rating",
+    "description": "turns a CVSS score (0-10) into a rating with a colored marker",
+    "expression": "function($score){ $score >= 9 ? \"\uD83D\uDD34 critical\" : $score >= 7 ? \"\uD83D\uDFE0 high\" : $score >= 4 ? \"\uD83D\uDFE1 medium\" : \"\uD83D\uDFE2 low\" }",
+    "tests": [
+        {
+            "description": "critical",
+            "parameters": [
+                9.8
+            ],
+            "expected": "\uD83D\uDD34 critical"
+        },
+        {
+            "description": "high",
+            "parameters": [
+                7
+            ],
+            "expected": "\uD83D\uDFE0 high"
+        },
+        {
+            "description": "low",
+            "parameters": [
+                2.1
+            ],
+            "expected": "\uD83D\uDFE2 low"
+        }
+    ]
+}

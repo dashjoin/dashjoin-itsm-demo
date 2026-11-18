@@ -1,16 +1,17 @@
-drop table if exists Application;
+-- base tables of the ITSM demo (cve, vulnerability and mitre are loaded by ETL)
 drop table if exists Ticket;
 drop table if exists User;
+drop table if exists Application;
 drop table if exists Software;
 drop table if exists Host;
 drop table if exists Datacenter;
 
-create table Datacenter (
+CREATE TABLE Datacenter (
   id text primary key not null, 
   address text
 );
 
-create table Host (
+CREATE TABLE Host (
   id text primary key not null,
   os text,
   cpus int,
@@ -20,7 +21,7 @@ create table Host (
   datacenter text references Datacenter(id)
 );
 
-create table Software (
+CREATE TABLE Software (
   id text primary key not null,
   vendor text,
   name text,
@@ -28,24 +29,28 @@ create table Software (
   description text
 );
 
-create table Application (
+CREATE TABLE Application (
   id text primary key not null,
   software text references Software(id),
   runsOn text references Host(id),
   description text
 );
 
-create table User (
+CREATE TABLE User (
   id text primary key not null,
   name text
 );
 
-create table Ticket (
-  id integer primary key AUTOINCREMENT,
-  description text not null,
-  created date,
+CREATE TABLE Ticket (
+  id integer primary key autoincrement,
+  title text not null,
+  description text,
+  created text,
   user text references User(id),
   severity text,
-  application text references Application(id)
+  status text,
+  assignee text,
+  application text references Application(id),
+  resolved text
 );
 

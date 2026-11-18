@@ -1,0 +1,2 @@
+($now := $replace($substring($now(), 0, 16), "T", " ");
+{"setObject": $merge([object, {"created": $now, "status": "open", "user": object.user ? object.user : $djUser(), "severity": object.severity ? object.severity : "medium"}])})

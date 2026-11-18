@@ -1,0 +1,9 @@
+{
+    "ID": "datacenter-health",
+    "database": "dj/itsm",
+    "type": "read",
+    "roles": [
+        "agent"
+    ],
+    "query": "select d.id as datacenter, count(t.id) as open, sum(t.severity in ('high', 'critical')) as urgent from Datacenter d left join Host h on h.datacenter = d.id left join Application a on a.runsOn = h.id left join Ticket t on t.application = a.id and t.status <> 'resolved' group by d.id order by d.id"
+}

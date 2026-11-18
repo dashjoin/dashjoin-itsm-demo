@@ -1,0 +1,4 @@
+($hosts := $all('itsm', 'Host'); $apps := $all('itsm', 'Application');
+ $node := function($h){ {'data': {'text': $h.id & ' (' & $h.os & ')', 'icon': $h.vmHost ? 'cloud' : 'dns', 'href': '/itsm/Host/' & $h.id},
+   'children': [$apps[runsOn = $h.id].{'data': {'text': id, 'icon': 'apps', 'href': '/itsm/Application/' & id}}, $hosts[vmHost = $h.id].$node($)]} };
+ $all('itsm', 'Datacenter').($dc := id; {'data': {'text': $dc, 'icon': 'domain', 'href': '/itsm/Datacenter/' & $dc}, 'children': [$hosts[datacenter = $dc and vmHost = null].$node($)]}))

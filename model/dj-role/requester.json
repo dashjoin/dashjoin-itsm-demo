@@ -1,0 +1,7 @@
+{
+    "ID": "requester",
+    "description": "requester role of the ITSM demo",
+    "properties": {
+        "homepage": "/page/MyTickets"
+    }
+}

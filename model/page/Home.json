@@ -1,0 +1,49 @@
+{
+    "ID": "Home",
+    "layout": {
+        "widget": "page",
+        "roles": [
+            "agent"
+        ],
+        "children": [
+            {
+                "widget": "html",
+                "html-pointer": "hero.html"
+            },
+            {
+                "widget": "chart",
+                "title": "Tickets per week",
+                "size": 8,
+                "chart": "bar",
+                "database": "itsm",
+                "query": "tickets-per-week",
+                "arguments": "{}"
+            },
+            {
+                "widget": "chart",
+                "title": "Tickets by status",
+                "size": 4,
+                "chart": "doughnut",
+                "database": "itsm",
+                "query": "tickets-by-status",
+                "arguments": "{}",
+                "style": {
+                    "scales.x.display": "false",
+                    "scales.y.display": "false"
+                }
+            },
+            {
+                "widget": "display",
+                "title": "Open tickets",
+                "size": 8,
+                "display": "($rank := {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}; $all('itsm', 'Ticket')[status != 'resolved'] ^ ($lookup($rank, severity), created).{'ticket': {'database': 'itsm', 'table': 'Ticket', 'pk1': id}, 'severity': severity, 'status': status, 'assignee': assignee})"
+            },
+            {
+                "widget": "map",
+                "title": "Datacenters",
+                "size": 4,
+                "display": "{'points': $all('itsm', 'Datacenter').{'address': address, 'popup': {'database': 'itsm', 'table': 'Datacenter', 'pk1': id}}}"
+            }
+        ]
+    }
+}

@@ -1,93 +1,128 @@
+-- sample data of the ITSM demo
 PRAGMA foreign_keys = 1;
+INSERT INTO Datacenter VALUES('Stuttgart','Kronenstr. 14, Stuttgart');
+INSERT INTO Datacenter VALUES('London','Mandela Way 9, London');
+INSERT INTO Datacenter VALUES('Los Angeles','3300 Lomita Blvd, Torrance, CA 90505, United States');
 
-delete from User;
-delete from Application;
-delete from Ticket;
-delete from Software;
-delete from Host;
-delete from Datacenter;
+INSERT INTO Host VALUES('linux01','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux02','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux03','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux04','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux05','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux06','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux07','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('linux08','linux_kernel',2,256,2048,NULL,'Los Angeles');
+INSERT INTO Host VALUES('vmware03','vmware',4,256,1014,NULL,'London');
+INSERT INTO Host VALUES('vmware04','vmware',4,256,1014,NULL,'Los Angeles');
+INSERT INTO Host VALUES('vmware01','vmware',2,128,1014,NULL,'Stuttgart');
+INSERT INTO Host VALUES('vmware02','vmware',2,128,1014,NULL,'Stuttgart');
+INSERT INTO Host VALUES('dc','windows',1,32,128,'vmware01','Stuttgart');
+INSERT INTO Host VALUES('sap','windows',1,32,128,'vmware01','Stuttgart');
+INSERT INTO Host VALUES('exchange','windows',1,32,128,'vmware02','Stuttgart');
+INSERT INTO Host VALUES('fw01','junos',4,16,64,NULL,'Stuttgart');
 
-INSERT INTO Software
-VALUES
-  ("netapp-ontap", "netapp", "ontap_tools", "11", "ONTAP helps you create a storage infrastructure that reduces costs, accelerates critical workloads, and protects and secures data across your hybrid multicloud"),
-  ("vmware-vsphere-9", "vmware", "vsphere", "9", "VMware vSphere is a suite of software components for virtualization. These include ESXi, vCenter Server, and other software components that fulfill several different functions in the vSphere environment"),
-  ("sap-host-agent", "sap", "host_agent", "7.22", "The SAP Host Agent is a tool that you can use for monitoring and controlling SAP and non-SAP instances, operating systems, and databases. It is installed automatically during the installation of new SAP instances with SAP kernel 7.20 or higher."),
-  ("windows-server-2019", "micosoft", "windows-server", "2019", "Windows Server 2019 is the ninth version of the Windows Server operating system by Microsoft, as part of the Windows NT family of operating systems. It is the second version of the server operating system based on the Windows 10 platform, after Windows Server 2016."),
-  ("exchange-2019", "micosoft", "exchange", "2019", "Microsoft Exchange Server is a mail server and calendaring server developed by Microsoft. It runs exclusively on Windows Server operating systems."),
-  ("netweaver_application_server_abap", "sap", "netweaver_application_server_abap"  ,             "8",  "SAP NetWeaver is a technology platform that allows organizations to integrate data, business processes, elements and more from a variety of sources into unified SAP environments"),
-  ("netweaver_application_server_abap_kernel", "sap",  "netweaver_application_server_abap_kernel" ,       "8",    "ABAP Kernel component for SAP"),
-  ("netweaver_application_server_abap_krnl64nuc", "sap",  "netweaver_application_server_abap_krnl64nuc" ,    "8",    "Netweaver linux kernel"),
-  ("netweaver_application_server_abap_krnl64uc", "sap",  "netweaver_application_server_abap_krnl64uc",      "8",    "SAP NetWeaver is a technology platform that allows organizations to integrate data, business processes, elements and more from a variety of sources into unified SAP environments"),
-  ("business_objects_business_intelligence_platform", "sap",  "business_objects_business_intelligence_platform", "8",    "Business Objects was an enterprise software company, specializing in business intelligence. Business Objects was acquired in 2007 by German company SAP AG. The company claimed more than 46,000 customers in its final earnings release prior to being acquired by SAP"),
-  ("business_planning_and_consolidation", "sap",  "business_planning_and_consolidation" ,            "8",    "Business planning and consolidation suite"),
-  ("netweaver_application_server_for_java", "sap",  "netweaver_application_server_for_java" ,          "8",    "Netweaver Java stack"),
-  ("businessobjects_business_intelligence_platform", "sap",  "businessobjects_business_intelligence_platform",  "8",    "Business Objects was an enterprise software company, specializing in business intelligence. Business Objects was acquired in 2007 by German company SAP AG. The company claimed more than 46,000 customers in its final earnings release prior to being acquired by SAP"),
-  ("grc_process_control", "sap", "grc_process_control", "8",    ""),
-  ("netweaver", "sap", "netweaver", "8",    ""),
-  ("bank_account_management", "sap", "bank_account_management", "8",    ""),
-  ("solution_manager", "sap", "solution_manager", "8",    ""),
-  ("junos", "juniper", "junos" ,  "8",    ""),
-  ("junos_os_evolved", "juniper", "junos_os_evolved",              "8",    ""),
-  ("modbus_tcp_server_add_on_instructions", "rockwellautomation", "modbus_tcp_server_add_on_instructions",           "8",    ""),
-  ("twake", "linagora", "twake", "8",    ""),
-  ("linux_kernel", "linux", "linux_kernel", "8",    ""),
-  ("pdf_viewer", "pdf_viewer_project",  "pdf_viewer", "8",    "");
+INSERT INTO Software VALUES('netapp-ontap','netapp','ontap_tools','11','ONTAP helps you create a storage infrastructure that reduces costs, accelerates critical workloads, and protects and secures data across your hybrid multicloud');
+INSERT INTO Software VALUES('vmware-vsphere-9','vmware','vsphere','9','VMware vSphere is a suite of software components for virtualization. These include ESXi, vCenter Server, and other software components that fulfill several different functions in the vSphere environment');
+INSERT INTO Software VALUES('sap-host-agent','sap','host_agent','7.22','The SAP Host Agent is a tool that you can use for monitoring and controlling SAP and non-SAP instances, operating systems, and databases. It is installed automatically during the installation of new SAP instances with SAP kernel 7.20 or higher.');
+INSERT INTO Software VALUES('windows-server-2019','microsoft','windows-server','2019','Windows Server 2019 is the ninth version of the Windows Server operating system by Microsoft, as part of the Windows NT family of operating systems. It is the second version of the server operating system based on the Windows 10 platform, after Windows Server 2016.');
+INSERT INTO Software VALUES('exchange-2019','microsoft','exchange','2019','Microsoft Exchange Server is a mail server and calendaring server developed by Microsoft. It runs exclusively on Windows Server operating systems.');
+INSERT INTO Software VALUES('netweaver_application_server_abap','sap','netweaver_application_server_abap','8','SAP NetWeaver is a technology platform that allows organizations to integrate data, business processes, elements and more from a variety of sources into unified SAP environments');
+INSERT INTO Software VALUES('netweaver_application_server_abap_kernel','sap','netweaver_application_server_abap_kernel','8','ABAP Kernel component for SAP');
+INSERT INTO Software VALUES('netweaver_application_server_abap_krnl64nuc','sap','netweaver_application_server_abap_krnl64nuc','8','Netweaver linux kernel');
+INSERT INTO Software VALUES('netweaver_application_server_abap_krnl64uc','sap','netweaver_application_server_abap_krnl64uc','8','SAP NetWeaver is a technology platform that allows organizations to integrate data, business processes, elements and more from a variety of sources into unified SAP environments');
+INSERT INTO Software VALUES('business_objects_business_intelligence_platform','sap','business_objects_business_intelligence_platform','8','Business Objects was an enterprise software company, specializing in business intelligence. Business Objects was acquired in 2007 by German company SAP AG. The company claimed more than 46,000 customers in its final earnings release prior to being acquired by SAP');
+INSERT INTO Software VALUES('business_planning_and_consolidation','sap','business_planning_and_consolidation','8','Business planning and consolidation suite');
+INSERT INTO Software VALUES('netweaver_application_server_for_java','sap','netweaver_application_server_for_java','8','Netweaver Java stack');
+INSERT INTO Software VALUES('businessobjects_business_intelligence_platform','sap','businessobjects_business_intelligence_platform','8','Business Objects was an enterprise software company, specializing in business intelligence. Business Objects was acquired in 2007 by German company SAP AG. The company claimed more than 46,000 customers in its final earnings release prior to being acquired by SAP');
+INSERT INTO Software VALUES('grc_process_control','sap','grc_process_control','8','');
+INSERT INTO Software VALUES('netweaver','sap','netweaver','8','');
+INSERT INTO Software VALUES('bank_account_management','sap','bank_account_management','8','');
+INSERT INTO Software VALUES('solution_manager','sap','solution_manager','8','');
+INSERT INTO Software VALUES('junos','juniper','junos','8','');
+INSERT INTO Software VALUES('junos_os_evolved','juniper','junos_os_evolved','8','');
+INSERT INTO Software VALUES('modbus_tcp_server_add_on_instructions','rockwellautomation','modbus_tcp_server_add_on_instructions','8','');
+INSERT INTO Software VALUES('twake','linagora','twake','8','');
+INSERT INTO Software VALUES('linux_kernel','linux','linux_kernel','8','');
+INSERT INTO Software VALUES('pdf_viewer','pdf_viewer_project','pdf_viewer','8','');
 
-INSERT INTO Datacenter
-VALUES
-  ("Stuttgart", "Kronenstr. 14, Stuttgart"),
-  ("London", "Madela Way 9, London"),
-  ("Los Angeles", "3300 Lomita Blvd, Torrance, CA 90505, United States");
+INSERT INTO Application VALUES('netapp-ontap','netapp-ontap','vmware03','ontop software for internal netapp file server');
+INSERT INTO Application VALUES('sap-agent','sap-host-agent','sap','central ERP instance used by all offices');
+INSERT INTO Application VALUES('windows-sap','windows-server-2019','sap','operating system instance for the central SAP');
+INSERT INTO Application VALUES('linux01','linux_kernel','linux01','Linux cluster node 1');
+INSERT INTO Application VALUES('linux02','linux_kernel','linux02','Linux cluster node 2');
+INSERT INTO Application VALUES('linux03','linux_kernel','linux03','Linux cluster node 3');
+INSERT INTO Application VALUES('linux04','linux_kernel','linux04','Linux cluster node 4');
+INSERT INTO Application VALUES('linux05','linux_kernel','linux05','Linux cluster node 5');
+INSERT INTO Application VALUES('linux06','linux_kernel','linux06','Linux cluster node 6');
+INSERT INTO Application VALUES('linux07','linux_kernel','linux07','Linux cluster node 7');
+INSERT INTO Application VALUES('linux08','linux_kernel','linux08','Linux cluster node 8');
+INSERT INTO Application VALUES('exchange','exchange-2019','exchange','company wide e-mail and calendars');
+INSERT INTO Application VALUES('active-directory','windows-server-2019','dc','user accounts, groups and logins');
+INSERT INTO Application VALUES('sap-erp','netweaver_application_server_abap','sap','SAP ERP for finance and purchasing');
+INSERT INTO Application VALUES('sap-bi','businessobjects_business_intelligence_platform','sap','management reporting');
+INSERT INTO Application VALUES('vcenter','vmware-vsphere-9','vmware01','virtualization management');
+INSERT INTO Application VALUES('fw-edge','junos','fw01','edge firewall and site-to-site VPN');
 
-INSERT INTO Host
-VALUES
-  ("linux01", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux02", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux03", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux04", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux05", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux06", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux07", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("linux08", "linux_kernel", 2, 256, 2048, null, "Los Angeles"),
-  ("vmware03", "vmware", 4, 256, 1014, null, "London"),
-  ("vmware04", "vmware", 4, 256, 1014, null, "Los Angeles"),
-  ("vmware01", "vmware", 2, 128, 1014, null, "Stuttgart"),
-  ("vmware02", "vmware", 2, 128, 1014, null, "Stuttgart"),
-  ("dc", "windows", 1, 32, 128, "vmware01", "Stuttgart"),
-  ("sap", "windows", 1, 32, 128, "vmware01", "Stuttgart"),
-  ("exchange", "windows", 1, 32, 128, "vmware02", "Stuttgart");
+INSERT INTO User VALUES('pellentesque@protonmail.org','Thomas Estes');
+INSERT INTO User VALUES('et@google.couk','Keith Collins');
+INSERT INTO User VALUES('eu@yahoo.ca','Channing Holt');
+INSERT INTO User VALUES('fusce.aliquam@protonmail.couk','Jakeem Boyd');
+INSERT INTO User VALUES('dolor.quam.elementum@google.org','Leigh Stanley');
+INSERT INTO User VALUES('auctor.vitae@aol.couk','Mechelle O''brien');
+INSERT INTO User VALUES('at.fringilla@protonmail.org','Jonas Mercer');
+INSERT INTO User VALUES('nunc.ullamcorper@aol.couk','Breanna Shannon');
+INSERT INTO User VALUES('orci.ut@outlook.org','Rowan Drake');
+INSERT INTO User VALUES('eros.turpis@yahoo.org','Paul Scott');
+INSERT INTO User VALUES('sed.dolor@aol.ca','Whitney Mccullough');
+INSERT INTO User VALUES('etiam.imperdiet@google.couk','Clio Pierce');
+INSERT INTO User VALUES('sodales.mauris.blandit@hotmail.net','Silas Levine');
+INSERT INTO User VALUES('morbi.sit@hotmail.couk','Reece Tate');
+INSERT INTO User VALUES('sagittis.felis@google.net','Judith Ware');
+INSERT INTO User VALUES('semper.et@hotmail.com','Adrian Rush');
+INSERT INTO User VALUES('maecenas@icloud.ca','Cassandra Lawson');
+INSERT INTO User VALUES('lacus.ut@protonmail.net','Laith Lynch');
+INSERT INTO User VALUES('requester@localhost','Demo Requester');
 
-INSERT INTO Application
-VALUES
-  ("netapp-ontap", "netapp-ontap", "vmware03", "ontop software for internal netapp file server"),
-  ("sap-agent", "sap-host-agent", "sap", "central ERP instance used by all offices"),
-  ("windows-sap", "windows-server-2019", "sap", "operating system instance for the central SAP"),
-  ("linux01", "linux_kernel", "linux01", "Linux cluster node 1"),
-  ("linux02", "linux_kernel", "linux02", "Linux cluster node 2"),
-  ("linux03", "linux_kernel", "linux03", "Linux cluster node 3"),
-  ("linux04", "linux_kernel", "linux04", "Linux cluster node 4"),
-  ("linux05", "linux_kernel", "linux05", "Linux cluster node 5"),
-  ("linux06", "linux_kernel", "linux06", "Linux cluster node 6"),
-  ("linux07", "linux_kernel", "linux07", "Linux cluster node 7"),
-  ("linux08", "linux_kernel", "linux08", "Linux cluster node 8");
+INSERT INTO Ticket VALUES(1,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-09-04 02:58','et@google.couk','low','resolved','agent@localhost','linux01','2026-09-07 02:58');
+INSERT INTO Ticket VALUES(2,'High load average on node','High load average on node. Reported via service desk.','2026-09-05 02:03','at.fringilla@protonmail.org','medium','resolved','agent@localhost','linux01','2026-09-07 20:03');
+INSERT INTO Ticket VALUES(3,'SAP agent does not collect data','SAP agent does not collect data. Reported via service desk.','2026-09-06 05:15','et@google.couk','medium','resolved','ops@localhost','sap-agent','2026-09-06 16:15');
+INSERT INTO Ticket VALUES(4,'Shared calendar not syncing','Shared calendar not syncing. Reported via service desk.','2026-09-07 07:56','pellentesque@protonmail.org','medium','resolved','agent@localhost','exchange','2026-09-09 04:56');
+INSERT INTO Ticket VALUES(5,'File share \\fs01 is read only','File share \\fs01 is read only. Reported via service desk.','2026-09-10 06:14','et@google.couk','low','resolved','ops@localhost','netapp-ontap','2026-09-12 11:14');
+INSERT INTO Ticket VALUES(6,'BI report shows yesterday''s data','BI report shows yesterday''s data. Reported via service desk.','2026-09-11 01:52','at.fringilla@protonmail.org','medium','resolved','agent@localhost','sap-bi','2026-09-11 11:52');
+INSERT INTO Ticket VALUES(7,'Disk /var full','Disk /var full. Reported via service desk.','2026-09-12 04:25','eros.turpis@yahoo.org','high','open',NULL,'linux02',NULL);
+INSERT INTO Ticket VALUES(8,'SSH host key changed warning','SSH host key changed warning. Reported via service desk.','2026-09-15 01:44','eu@yahoo.ca','low','open',NULL,'linux03',NULL);
+INSERT INTO Ticket VALUES(9,'Cannot reach partner portal through firewall','Cannot reach partner portal through firewall. Reported via service desk.','2026-09-18 05:05','at.fringilla@protonmail.org','low','resolved','ops@localhost','fw-edge','2026-09-18 06:05');
+INSERT INTO Ticket VALUES(10,'Missing authorization for transaction ME21N','Missing authorization for transaction ME21N. Reported via service desk.','2026-09-19 00:50','eros.turpis@yahoo.org','high','resolved','ops@localhost','sap-erp','2026-09-20 04:50');
+INSERT INTO Ticket VALUES(11,'Account locked out','Account locked out. Reported via service desk.','2026-09-24 03:33','requester@localhost','high','resolved','agent@localhost','active-directory','2026-09-27 18:33');
+INSERT INTO Ticket VALUES(12,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-09-24 06:58','et@google.couk','high','resolved','agent@localhost','linux01','2026-09-26 04:58');
+INSERT INTO Ticket VALUES(13,'BI report shows yesterday''s data','BI report shows yesterday''s data. Reported via service desk.','2026-10-06 08:23','requester@localhost','medium','resolved','agent@localhost','sap-bi','2026-10-06 18:23');
+INSERT INTO Ticket VALUES(14,'Outlook cannot connect to mailbox','Outlook cannot connect to mailbox. Reported via service desk.','2026-10-07 06:20','at.fringilla@protonmail.org','high','open',NULL,'exchange',NULL);
+INSERT INTO Ticket VALUES(15,'Emails stuck in outbox','Emails stuck in outbox. Reported via service desk.','2026-10-08 01:59','pellentesque@protonmail.org','medium','resolved','ops@localhost','exchange','2026-10-09 08:59');
+INSERT INTO Ticket VALUES(16,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-10-08 08:46','pellentesque@protonmail.org','high','resolved','ops@localhost','linux01','2026-10-09 19:46');
+INSERT INTO Ticket VALUES(17,'Cron job did not run','Cron job did not run. Reported via service desk.','2026-10-09 08:57','eros.turpis@yahoo.org','medium','resolved','agent@localhost','linux02','2026-10-09 16:57');
+INSERT INTO Ticket VALUES(18,'Kernel patch required for CVE','Kernel patch required for CVE. Reported via service desk.','2026-10-10 02:18','et@google.couk','medium','resolved','ops@localhost','linux05','2026-10-10 18:18');
+INSERT INTO Ticket VALUES(19,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-10-11 00:22','eros.turpis@yahoo.org','medium','resolved','agent@localhost','linux01','2026-10-13 22:22');
+INSERT INTO Ticket VALUES(20,'SAP agent does not collect data','SAP agent does not collect data. Reported via service desk.','2026-10-13 02:16','pellentesque@protonmail.org','low','resolved','ops@localhost','sap-agent','2026-10-14 06:16');
+INSERT INTO Ticket VALUES(21,'Dashboard export to Excel fails','Dashboard export to Excel fails. Reported via service desk.','2026-10-13 06:32','eros.turpis@yahoo.org','high','resolved','agent@localhost','sap-bi','2026-10-16 20:32');
+INSERT INTO Ticket VALUES(22,'Password reset not working','Password reset not working. Reported via service desk.','2026-10-14 01:20','requester@localhost','low','resolved','ops@localhost','active-directory','2026-10-15 04:20');
+INSERT INTO Ticket VALUES(23,'Kernel patch required for CVE','Kernel patch required for CVE. Reported via service desk.','2026-10-15 06:10','et@google.couk','medium','resolved','agent@localhost','linux05','2026-10-17 19:10');
+INSERT INTO Ticket VALUES(24,'Kernel patch required for CVE','Kernel patch required for CVE. Reported via service desk.','2026-10-19 04:35','pellentesque@protonmail.org','medium','resolved','ops@localhost','linux05','2026-10-20 21:35');
+INSERT INTO Ticket VALUES(25,'SSH host key changed warning','SSH host key changed warning. Reported via service desk.','2026-10-20 07:03','requester@localhost','medium','resolved','agent@localhost','linux03','2026-10-21 19:03');
+INSERT INTO Ticket VALUES(26,'Kernel patch required for CVE','Kernel patch required for CVE. Reported via service desk.','2026-10-21 01:23','at.fringilla@protonmail.org','high','resolved','agent@localhost','linux05','2026-10-24 19:23');
+INSERT INTO Ticket VALUES(27,'Dashboard export to Excel fails','Dashboard export to Excel fails. Reported via service desk.','2026-10-22 01:35','requester@localhost','low','resolved','agent@localhost','sap-bi','2026-10-23 09:35');
+INSERT INTO Ticket VALUES(28,'SAP agent does not collect data','SAP agent does not collect data. Reported via service desk.','2026-10-28 00:14','requester@localhost','medium','resolved','ops@localhost','sap-agent','2026-10-31 10:14');
+INSERT INTO Ticket VALUES(29,'vCenter alarm: datastore usage above 90%','vCenter alarm: datastore usage above 90%. Reported via service desk.','2026-10-30 05:12','eu@yahoo.ca','low','resolved','agent@localhost','vcenter','2026-11-01 03:12');
+INSERT INTO Ticket VALUES(30,'SAP agent does not collect data','SAP agent does not collect data. Reported via service desk.','2026-11-01 04:53','et@google.couk','medium','open','ops@localhost','sap-agent',NULL);
+INSERT INTO Ticket VALUES(31,'SAP agent does not collect data','SAP agent does not collect data. Reported via service desk.','2026-11-04 04:33','et@google.couk','low','resolved','ops@localhost','sap-agent','2026-11-06 21:33');
+INSERT INTO Ticket VALUES(32,'Account locked out','Account locked out. Reported via service desk.','2026-11-04 06:20','at.fringilla@protonmail.org','high','resolved','agent@localhost','active-directory','2026-11-06 08:20');
+INSERT INTO Ticket VALUES(33,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-11-04 07:04','eros.turpis@yahoo.org','low','resolved','agent@localhost','linux01','2026-11-06 07:04');
+INSERT INTO Ticket VALUES(34,'SSH host key changed warning','SSH host key changed warning. Reported via service desk.','2026-11-05 03:11','et@google.couk','high','resolved','agent@localhost','linux03','2026-11-06 10:11');
+INSERT INTO Ticket VALUES(35,'BI report shows yesterday''s data','BI report shows yesterday''s data. Reported via service desk.','2026-11-08 01:08','et@google.couk','critical','open',NULL,'sap-bi',NULL);
+INSERT INTO Ticket VALUES(36,'Cron job did not run','Cron job did not run. Reported via service desk.','2026-11-08 02:18','requester@localhost','critical','in progress','agent@localhost','linux02',NULL);
+INSERT INTO Ticket VALUES(37,'Account locked out','Account locked out. Reported via service desk.','2026-11-09 23:56','eros.turpis@yahoo.org','medium','open','agent@localhost','active-directory',NULL);
+INSERT INTO Ticket VALUES(38,'SSH host key changed warning','SSH host key changed warning. Reported via service desk.','2026-11-11 02:14','et@google.couk','high','in progress','agent@localhost','linux03',NULL);
+INSERT INTO Ticket VALUES(39,'Cluster node is down','Cluster node is down. Reported via service desk.','2026-11-12 00:07','et@google.couk','critical','open','agent@localhost','linux01',NULL);
+INSERT INTO Ticket VALUES(40,'Disk /var full','Disk /var full. Reported via service desk.','2026-11-13 01:26','eros.turpis@yahoo.org','critical','open',NULL,'linux02',NULL);
+INSERT INTO Ticket VALUES(41,'SSH host key changed warning','SSH host key changed warning. Reported via service desk.','2026-11-15 04:45','requester@localhost','low','open',NULL,'linux03',NULL);
+INSERT INTO Ticket VALUES(42,'Purchase order posting is slow','Purchase order posting is slow. Reported via service desk.','2026-11-15 06:13','requester@localhost','high','in progress','ops@localhost','sap-erp',NULL);
 
-INSERT INTO User (id,name)
-VALUES
-  ("pellentesque@protonmail.org","Thomas Estes"),
-  ("et@google.couk","Keith Collins"),
-  ("eu@yahoo.ca","Channing Holt"),
-  ("fusce.aliquam@protonmail.couk","Jakeem Boyd"),
-  ("dolor.quam.elementum@google.org","Leigh Stanley"),
-  ("auctor.vitae@aol.couk","Mechelle O'brien"),
-  ("at.fringilla@protonmail.org","Jonas Mercer"),
-  ("nunc.ullamcorper@aol.couk","Breanna Shannon"),
-  ("orci.ut@outlook.org","Rowan Drake"),
-  ("eros.turpis@yahoo.org","Paul Scott"),
-  ("sed.dolor@aol.ca","Whitney Mccullough"),
-  ("etiam.imperdiet@google.couk","Clio Pierce"),
-  ("sodales.mauris.blandit@hotmail.net","Silas Levine"),
-  ("morbi.sit@hotmail.couk","Reece Tate"),
-  ("sagittis.felis@google.net","Judith Ware"),
-  ("semper.et@hotmail.com","Adrian Rush"),
-  ("maecenas@icloud.ca","Cassandra Lawson"),
-  ("lacus.ut@protonmail.net","Laith Lynch");

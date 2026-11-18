@@ -1,0 +1,175 @@
+{
+    "ID": "dj/itsm",
+    "name": "itsm",
+    "djClassName": "org.dashjoin.service.SQLDatabase",
+    "url": "jdbc:sqlite:itsm.db",
+    "readRoles": [
+        "agent"
+    ],
+    "writeRoles": [
+        "agent"
+    ],
+    "tables": {
+        "Ticket": {
+            "dj-label": "#${id} ${title}",
+            "before-update": "object.status = \"resolved\" and $not($exists(object.resolved)) ? {\"setObject\": $merge([object, {\"resolved\": $replace($substring($now(), 0, 16), \"T\", \" \")}])}",
+            "before-create-pointer": "ticket-before-create.jsonata",
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "size": 8,
+                        "context": "$merge([value, {'name': $read('itsm', 'User', value.user).name, 'icon': {'open': '\uD83C\uDD95', 'in progress': '\uD83D\uDD27', 'resolved': '✅'}.$lookup($, $$.value.status)}])",
+                        "markdown-pointer": "ticket-header.md"
+                    },
+                    {
+                        "widget": "container",
+                        "size": 4,
+                        "children": [
+                            {
+                                "widget": "button",
+                                "text": "Take it",
+                                "if": "value.status = 'open'",
+                                "print": "($update('itsm', 'Ticket', value.id, {'assignee': $djUser(), 'status': 'in progress'}); $reload())"
+                            },
+                            {
+                                "widget": "button",
+                                "text": "Resolve",
+                                "if": "value.status != 'resolved'",
+                                "print": "($update('itsm', 'Ticket', value.id, {'status': 'resolved'}); $reload())"
+                            }
+                        ]
+                    },
+                    {
+                        "widget": "edit"
+                    }
+                ]
+            }
+        },
+        "User": {
+            "dj-label": "${name}"
+        },
+        "Software": {
+            "dj-label": "${vendor} ${name} ${version}",
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "context": "value",
+                        "markdown-pointer": "software-header.md"
+                    },
+                    {
+                        "widget": "links"
+                    }
+                ]
+            }
+        },
+        "Host": {
+            "dj-label": "${id}",
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "size": 8,
+                        "context": "value",
+                        "markdown-pointer": "host-header.md"
+                    },
+                    {
+                        "widget": "display",
+                        "size": 4,
+                        "title": "Utilization",
+                        "display": "{'tickets open': $count($all('itsm', 'Ticket')[status != 'resolved' and application in $all('itsm', 'Application', 0, 100, null, false, {'runsOn': $$.value.id}).id])}"
+                    },
+                    {
+                        "widget": "links"
+                    }
+                ]
+            }
+        },
+        "Application": {
+            "dj-label": "${id}",
+            "readRoles": [
+                "agent",
+                "requester"
+            ],
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "context": "value",
+                        "markdown-pointer": "application-header.md"
+                    },
+                    {
+                        "widget": "display",
+                        "title": "Known vulnerabilities",
+                        "size": 8,
+                        "display": "($rating := $use('cvss-rating') ~> $eval; $query('itsm', 'app-cves', {'app': value.id}).{'cve': {'database': 'itsm', 'table': 'cve', 'pk1': `cve.cve`}, 'rating': $rating(score), 'score': score, 'published': published})"
+                    },
+                    {
+                        "widget": "links",
+                        "size": 4
+                    }
+                ]
+            }
+        },
+        "Datacenter": {
+            "dj-label": "${id}",
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "size": 5,
+                        "context": "value",
+                        "markdown-pointer": "datacenter-header.md"
+                    },
+                    {
+                        "widget": "map",
+                        "size": 7,
+                        "display": "[value.address]"
+                    },
+                    {
+                        "widget": "links"
+                    }
+                ]
+            }
+        },
+        "cve": {
+            "dj-label": "${id}",
+            "instanceLayout": {
+                "widget": "page",
+                "children": [
+                    {
+                        "widget": "markdown",
+                        "size": 8,
+                        "context": "($rating := $use('cvss-rating') ~> $eval; $s := $min([10, $round(value.impactScore + value.exploitabilityScore, 1)]); $merge([value, {'score': $s, 'rating': $rating($s), 'published': value.publishedDate}]))",
+                        "markdown-pointer": "cve-header.md"
+                    },
+                    {
+                        "widget": "display",
+                        "size": 4,
+                        "title": "Affected applications",
+                        "display": "($v := $all('itsm', 'vulnerability', 0, 1000, null, false, {'cve': value.id}); $s := $all('itsm', 'Software')[vendor in $v.vendor and name in $v.software].id; $all('itsm', 'Application')[software in $s].{'application': {'database': 'itsm', 'table': 'Application', 'pk1': id}})"
+                    },
+                    {
+                        "widget": "display",
+                        "title": "MITRE ATT&CK threat intel",
+                        "display": "$search(value.id, 10, 'itsm', 'mitre').{'mentioned in': $read('itsm', 'mitre', id.pk[0]).description}"
+                    }
+                ]
+            }
+        },
+        "vulnerability": {
+            "properties": {
+                "cve": {
+                    "ref": "dj/itsm/cve/id",
+                    "displayWith": "fk"
+                }
+            }
+        }
+    }
+}

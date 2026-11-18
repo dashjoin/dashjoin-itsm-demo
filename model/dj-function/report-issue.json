@@ -1,0 +1,26 @@
+{
+    "ID": "report-issue",
+    "djClassName": "org.dashjoin.function.Invoke",
+    "type": "write",
+    "roles": [
+        "requester",
+        "agent"
+    ],
+    "runas": "agent",
+    "expression": "$create(\"itsm\", \"Ticket\", {\"title\": title, \"description\": description, \"application\": application, \"severity\": severity, \"user\": $djUser()})",
+    "parameters": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "description": {
+            "type": "string"
+        },
+        "application": {
+            "type": "string"
+        },
+        "severity": {
+            "type": "string"
+        }
+    }
+}

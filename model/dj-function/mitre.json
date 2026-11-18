@@ -1,0 +1,29 @@
+{
+    "ID": "mitre",
+    "djClassName": "com.dashjoin.function.ETL",
+    "type": "write",
+    "database": "itsm",
+    "createSchema": true,
+    "oldData": "Delete All",
+    "roles": [
+        "agent"
+    ],
+    "expressions": {
+        "expression": "$ls(\"file:upload/cti/enterprise-attack/relationship\").url.$openJson($)"
+    },
+    "mappings": {
+        "mitre": {
+            "sourceTable": "table",
+            "pk": "id",
+            "rowMapping": {
+                "id": "id",
+                "description": "objects.description",
+                "relationship": "objects.relationship_type",
+                "created": "objects.created"
+            }
+        }
+    },
+    "start": "2026-11-18T20:14:20.815+00:00",
+    "status": "success",
+    "end": "2026-11-18T20:14:20.878+00:00"
+}

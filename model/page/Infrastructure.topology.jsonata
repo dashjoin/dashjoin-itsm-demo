@@ -1,0 +1,8 @@
+($hosts := $all('itsm', 'Host');
+ $phys := $hosts[vmHost = null]^(datacenter, id);
+ $vms := $hosts[vmHost != null]^(vmHost, id);
+ $x := $merge($phys#$i.{id: 160 * $i});
+ $node := function($table, $id, $label, $x, $y){ {'database': 'itsm', 'table': $table, 'id': $id, 'data': {'label': $label}, 'position': {'x': $x, 'y': $y}} };
+ [$all('itsm', 'Datacenter').($dc := id; $node('Datacenter', $dc, '🏢 ' & $dc, $average($phys[datacenter = $dc].$lookup($x, id)), 0)),
+  $phys.$node('Host', id, '🖥️ ' & id, $lookup($x, id), 150),
+  $vms#$i.$node('Host', id, '💠 ' & id, $lookup($x, $vms[0].vmHost) + 160 * $i, 300)])

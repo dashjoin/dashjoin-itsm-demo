@@ -1,0 +1,15 @@
+{
+    "ID": "app-cves",
+    "database": "dj/itsm",
+    "type": "read",
+    "roles": [
+        "agent"
+    ],
+    "query": "select distinct cve.id as cve, min(10, round(cve.impactScore + cve.exploitabilityScore, 1)) as score, date(cve.publishedDate / 1000, 'unixepoch') as published, cve.description from Application a join Software s on s.id = a.software join vulnerability v on v.vendor = s.vendor and v.software = s.name join cve on cve.id = v.cve where s.id <> 'linux_kernel' and a.id = ${app} order by 2 desc",
+    "arguments": {
+        "app": {
+            "type": "string",
+            "sample": "sap-erp"
+        }
+    }
+}

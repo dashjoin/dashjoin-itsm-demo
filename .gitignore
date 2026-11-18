@@ -1,0 +1,4 @@
+djusers.properties
+djroles.properties
+.env*
+model/user/

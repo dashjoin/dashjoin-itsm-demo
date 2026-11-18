@@ -1,0 +1,54 @@
+{
+    "ID": "MyTickets",
+    "layout": {
+        "widget": "page",
+        "roles": [
+            "requester",
+            "agent"
+        ],
+        "children": [
+            {
+                "widget": "markdown",
+                "size": 8,
+                "context": "$djUser()",
+                "markdown-pointer": "intro.md"
+            },
+            {
+                "widget": "button",
+                "text": "Report an issue",
+                "size": 4,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "widget": "string",
+                            "title": "What is the problem?",
+                            "required": true
+                        },
+                        "application": {
+                            "widget": "select",
+                            "title": "Application",
+                            "required": true,
+                            "options": "$all('itsm', 'Application').id"
+                        },
+                        "severity": {
+                            "widget": "select",
+                            "title": "How urgent?",
+                            "options": "['low', 'medium', 'high', 'critical']"
+                        },
+                        "description": {
+                            "widget": "textarea",
+                            "title": "Details"
+                        }
+                    }
+                },
+                "print": "($call('report-issue', form); $refresh(); 'Thanks! Your ticket was created.')"
+            },
+            {
+                "widget": "table",
+                "title": "My tickets",
+                "expression": "$call('my-tickets').{'#': id, 'title': title, 'application': application, 'severity': severity, 'status': status, 'created': created, 'resolved': resolved}"
+            }
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+($agent := 'agent' in $djRoles() or 'admin' in $djRoles();
+ $append($agent ? [
+  {"data": {"text": "Operations", "icon": "monitor_heart", "href": "/page/Home"}},
+  {"data": {"text": "Triage", "icon": "assignment_late", "href": "/page/Triage"}},
+  {"data": {"text": "Security", "icon": "gpp_maybe", "href": "/page/Security"}},
+  {"data": {"text": "Infrastructure", "icon": "lan", "href": "/page/Infrastructure"}},
+  {"data": {"text": "Data", "icon": "table_chart"}, "children": [
+    ["Ticket", "Application", "Host", "Datacenter", "Software", "User", "cve", "mitre"].{"data": {"text": $, "icon": "chevron_right", "href": "/itsm/" & $}}
+  ]}
+ ] : [], [{"data": {"text": "My tickets", "icon": "support_agent", "href": "/page/MyTickets"}}]))

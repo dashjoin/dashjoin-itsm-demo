@@ -1,14 +1,14 @@
 {
-    "$schema": "https://dashjoin.com/schema/app-manifest-v1.json",
-    "license": "Apache 2.0",
-    "name": "Dashjoin IT Service Management",
-    "categories": [
-        "Demo",
-        "Training"
-    ],
-    "description": "Tutorial: http://youtu.be/Asfp6X9cHwQ",
-    "author": "Dashjoin",
-    "website": "https://dashjoin.com",
-    "url": "https://github.com/dashjoin/dashjoin-itsm-demo",
-    "email": "info@dashjoin.com"
+  "$schema": "https://dashjoin.com/schema/app-manifest-v1.json",
+  "license": "Apache 2.0",
+  "name": "Dashjoin IT Service Management",
+  "categories": [
+    "Demo",
+    "Training"
+  ],
+  "description": "IT service desk with tickets, infrastructure, CVE exposure and MITRE threat intel",
+  "author": "Dashjoin",
+  "website": "https://dashjoin.com",
+  "url": "https://github.com/dashjoin/dashjoin-itsm-demo",
+  "email": "info@dashjoin.com"
 }
