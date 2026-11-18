@@ -1,5 +1,7 @@
 # Dashjoin IT Service Management Demo
 
+<img width="1245" height="759" alt="image" src="https://github.com/user-attachments/assets/f0543937-a200-43ce-98eb-4c60e7578781" />
+
 An IT service desk built on the Dashjoin Low Code Platform: tickets, infrastructure (datacenters, hosts, VMs,
 applications), known vulnerabilities from the National Vulnerability Database (NVD) and threat intel from MITRE ATT&CK,
 all in one SQLite database (`itsm.db`). Every page is a short JSON file in `model/`.
